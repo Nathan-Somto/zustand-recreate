@@ -1,0 +1,71 @@
+/* App Container */
+.app-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #444;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* App Title */
+.app-title {
+  text-align: center;
+  font-size: 24px;
+  color: #4a90e2;
+  margin-bottom: 20px;
+}
+
+/* Example Selector */
+.example-selector {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Example Container */
+.example-container {
+  margin-top: 20px;
+  padding: 20px;
+  background: #2b2b2b;
+  border: 1px solid #898989;
+  border-radius: 6px;
+}
+
+/* Example Title */
+.example-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Example Text */
+.example-text {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+.example-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #4a90e2;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.example-button:hover {
+  background-color: #357ab8;
+}
