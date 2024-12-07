@@ -37,7 +37,7 @@ const useTodosStore = create<TodosStore>(persist((set) => ({
                     return todo.id === id ? { done: !todo.done } : undefined;
                 }),
             };
-        }, { mergeNestedArray: false });
+        }, { mergeArray: false });
     },
     removeTodo: (id) => {
         console.log("remove todo");

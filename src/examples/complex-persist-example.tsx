@@ -14,7 +14,7 @@ const useStore = create<Store>(
                 return set(() => ({
                     friends: [friend]
                 }), {
-                    mergeNestedArray: true
+                    mergeArray: true
                 })
             },
             clearLocalStorage: () => api?.resetPersistence?.()

@@ -15,7 +15,7 @@ const useEvenNumberStore = create<EvenNumberStore>((set, get) => ({
                 evenNums: [...state.evenNums, state.evenNums[state.evenNums.length - 1] + 2]
             }
         }, {
-            mergeNestedArray: false
+            mergeArray: false
         })
     },
     getTotal: () => {

@@ -5,7 +5,7 @@ import { useSyncExternalStore } from "react";
 type DeepPartial<T> = { [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] | undefined; }
 interface Options {
   replace?: boolean;
-  mergeNestedArray?: boolean; // controls if nested array's should be merged or replaced by default
+  mergeArray?: boolean; // controls if nested array's should be merged or replaced by default
 }
 // the store that is created from the createStore function
 interface Store<T> {
@@ -53,13 +53,13 @@ const createStore = <TState extends object>(stateCreatorFn: StateCreator<TState,
   // eslint-disable-next-line prefer-const
   let initialState: TState;
   const listeners: Set<() => void> = new Set();
-  const setState: SetFn<TState> = (partial, options = { replace: false, mergeNestedArray: false }) => {
+  const setState: SetFn<TState> = (partial, options = { replace: false, mergeArray: false }) => {
     const nextState = typeof partial === 'function' ? partial(state) : partial;
     //* supports nested object update
     //  deep merge object support, i don't think original zustand supports this
     // so big ups to me
     const newState = (options?.replace && (typeof nextState !== 'object')) ? nextState as TState :
-      options.mergeNestedArray ? _.mergeWith({}, state, nextState, (objValue, srcValue) => {
+      options.mergeArray ? _.mergeWith({}, state, nextState, (objValue, srcValue) => {
         if (_.isArray(objValue)) {
           return objValue.concat(srcValue);
         }
@@ -108,7 +108,7 @@ type StorageData<TState extends object> = {
   version: number;
 }
 type PersistOptions<TState extends object> = {
-  apiOption?: Pick<Options, 'mergeNestedArray'>;
+  apiOption?: Pick<Options, 'mergeArray'>;
   key: string;
   deserialize?: (value: string) => StorageData<TState>;
   serialize?: (value: StorageData<TState>) => string;
@@ -162,7 +162,7 @@ const persist: PersistFn = (init, config) => (set, get, api) => {
       const mergedState = Object.assign({}, initResult, migratedState);
       if (hasHydrated) return mergedState as ReturnType<typeof init>;
       config?.onHydrate?.(mergedState);
-      api.setState(mergedState, { mergeNestedArray: config?.apiOption?.mergeNestedArray ?? false, replace: true });
+      api.setState(mergedState, { mergeArray: config?.apiOption?.mergeArray ?? false, replace: true });
       api.listeners.forEach(listener => listener())
       hasHydrated = true;
       return mergedState as ReturnType<typeof init>
